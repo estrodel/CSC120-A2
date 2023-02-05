@@ -2,7 +2,9 @@
 from typing import Dict, Union
 
 # Import the functions we wrote in procedural_resale_shop.py
-from procedural_resale_shop import buy, update_price, sell, print_inventory, refurbish
+from computer import Computer
+from oo_resale_shop import ResaleShop
+
 
 """ This helper function takes in a bunch of information about a computer,
     and packages it up into a python dictionary to make it easier to store
@@ -30,7 +32,10 @@ def create_computer(description: str,
 def main():
     
     # First, let's make a computer
-    computer = create_computer(
+    
+    shop = ResaleShop()   
+
+    computer1 = Computer(
         "Mac Pro (Late 2013)",
         "3.5 GHc 6-Core Intel Xeon E5",
         1024, 64,
@@ -43,35 +48,35 @@ def main():
     print("-" * 21)
 
     # Add it to the resale store's inventory
-    print("Buying", computer["description"])
+    print("Buying", computer1.description)
     print("Adding to inventory...")
-    computer_id = buy(computer)
+    computer1.itemID = shop.buy(computer1)
     print("Done.\n")
 
     # Make sure it worked by checking inventory
     print("Checking inventory...")
-    print_inventory()
+    shop.print_inventory()
     print("Done.\n")
 
     # Now, let's refurbish it
     new_OS = "MacOS Monterey"
-    print("Refurbishing Item ID:", computer_id, ", updating OS to", new_OS)
+    print("Refurbishing Item ID:",computer1.itemID, ", updating OS to", new_OS)
     print("Updating inventory...")
-    refurbish(computer_id, new_OS)
+    computer1.refurbish(new_OS)
     print("Done.\n")
 
     # Make sure it worked by checking inventory
     print("Checking inventory...")
-    print_inventory()
+    shop.print_inventory()
     print("Done.\n")
     
     # Now, let's sell it!
-    print("Selling Item ID:", computer_id)
-    sell(computer_id)
+    print("Selling Item ID:", computer1.itemID)
+    shop.sell(computer1.itemID)
     
     # Make sure it worked by checking inventory
     print("Checking inventory...")
-    print_inventory()
+    shop.print_inventory()
     print("Done.\n")
 
 # Calls the main() function when this file is run
