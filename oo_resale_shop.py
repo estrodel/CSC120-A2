@@ -7,8 +7,8 @@ class ResaleShop:
 
     # How will you set up your constructor?
     # Remember: in python, all constructors have the same name (__init__)
-    def __init__(self)->None:
-        pass
+    def __init__(self,inventory)->None:
+        self.inventory = inventory;
        
     def buy(self,computer: Dict[str, Union[str, int, bool]]):
         itemID = len(self.inventory)+1
